@@ -1,5 +1,6 @@
 package br.com.maa.escolamaa.models;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -17,10 +18,10 @@ public class Aluno {
 	private List<Habilidade> habilidades;
 
 	public Aluno criaId() {
-		  setId(new ObjectId());
-		  return this;
-		}
-	
+		setId(new ObjectId());
+		return this;
+	}
+
 	public ObjectId getId() {
 		return id;
 	}
@@ -54,6 +55,10 @@ public class Aluno {
 	}
 
 	public List<Nota> getNotas() {
+		if (notas == null) {
+			notas = new ArrayList<Nota>();
+		}
+
 		return notas;
 	}
 
@@ -62,11 +67,28 @@ public class Aluno {
 	}
 
 	public List<Habilidade> getHabilidades() {
+		if (habilidades == null) {
+
+			habilidades = new ArrayList<Habilidade>();
+
+		}
+
 		return habilidades;
+
 	}
 
 	public void setHabilidades(List<Habilidade> habilidades) {
 		this.habilidades = habilidades;
+	}
+
+	public void adiciona(Habilidade habilidade) {
+		this.getHabilidades().add(habilidade);
+
+	}
+
+	public void adiciona(Nota nota) {
+		this.getNotas().add(nota);
+
 	}
 
 }

@@ -2,6 +2,10 @@ package br.com.maa.escolamaa.models;
 
 public class Curso {
 	private String nome;
+	
+	public Curso() {
+		
+	}
 
 	public Curso(String nomeCurso) {
 		nome = nomeCurso;

@@ -21,7 +21,23 @@ public class AlunoService {
 	}
 
 	public List<Aluno> obterTodosAlunos() {
-		
+
 		return repositorio.getAll();
+	}
+
+	public Aluno getById(String id) {
+
+		return repositorio.getById(id);
+	}
+
+	public List<Aluno> getAllByNota(String classificacao, double notaCorte) {
+
+		return repositorio.getAllByNota(classificacao, notaCorte);
+
+	}
+
+	public  List<Aluno> getByName(String nome) {
+
+		return repositorio.getByName(nome);
 	}
 }
