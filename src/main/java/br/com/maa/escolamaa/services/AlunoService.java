@@ -40,4 +40,9 @@ public class AlunoService {
 
 		return repositorio.getByName(nome);
 	}
+
+	public List<Aluno> getAlunosProximos(Aluno aluno) {
+		
+		return repositorio.getAlunosProximos(aluno);
+	}
 }

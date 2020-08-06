@@ -16,6 +16,7 @@ import org.bson.codecs.EncoderContext;
 import org.bson.types.ObjectId;
 
 import br.com.maa.escolamaa.models.Aluno;
+import br.com.maa.escolamaa.models.Contato;
 import br.com.maa.escolamaa.models.Curso;
 import br.com.maa.escolamaa.models.Habilidade;
 import br.com.maa.escolamaa.models.Nota;
@@ -61,6 +62,16 @@ public class AlunoCodec implements CollectibleCodec<Aluno> {
 			documento.put("notas", notasParaSalvar);
 		}
 
+		Contato contato = aluno.getContato();
+
+		List<Double> coordinates = new ArrayList<Double>();
+		for (Double location : contato.getCoordinates()) {
+			coordinates.add(location);
+		}
+
+		documento.put("contato", new Document().append("endereco", contato.getEndereco())
+				.append("coordinates", coordinates).append("type", contato.getType()));
+
 		codec.encode(writer, documento, encoder);
 	}
 
@@ -101,6 +112,13 @@ public class AlunoCodec implements CollectibleCodec<Aluno> {
 						new Habilidade(documentHabilidade.getString("nome"), documentHabilidade.getString("nivel")));
 			}
 			aluno.setHabilidades(habilidadesDoAluno);
+		}
+
+		Document contato = (Document) document.get("contato");
+		if (contato != null) {
+			String endereco = contato.getString("contato");
+			List<Double> coordinates = (List<Double>) contato.get("coordinates");
+			aluno.setContato(new Contato(endereco, coordinates));
 		}
 
 		return aluno;
